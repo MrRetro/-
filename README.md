@@ -17,4 +17,4 @@
 第一章,主讲React组件与dom组件的不同。   
 第二章，浅漫React技术栈，这章讲的有些范范，感觉就像凑字数的。有点蒙，但后面讲的就比较明了了，有代理属性和反射组件以及动画的往后得多看几遍，吃透吃透（估计是我的水平不够）。
     
-这边有一个插曲("webpack一篇文章就能搞懂！")[http://www.2tro.com/article_detail.aspx?TypeID=2&art=10]
+这边有一个插曲["webpack一篇文章就能搞懂！"](http://www.2tro.com/article_detail.aspx?TypeID=2&art=10)
