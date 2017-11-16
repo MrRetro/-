@@ -9,6 +9,15 @@
 	
 	'disclaimer':'免责声明',
 	'sufficient':'充分',
+	'sensitive':'敏感',
 	'Apart':'分离的',
+	'occupies':'使用',
+	'flagged':'被标记',
+	'violation':'违反',
+	'license':'许可',
+	'agreement':'协议',
+	'specifically':'具体来说',
+	'indirectly':'间接的',
+	'interfere':'妨碍',
 	
 }
