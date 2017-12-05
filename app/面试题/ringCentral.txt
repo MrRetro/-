@@ -1,0 +1,159 @@
+/**
+  extensions is an Array and each item has such format:
+  {firstName: 'xxx', lastName: 'xxx', ext: 'xxx', extType: 'xxx'}
+  lastName, ext can be empty, extType can only has "DigitalUser", "VirtualUser","FaxUser","Dept","AO".
+**/
+
+/**
+  Question 1: sort extensions by "firstName" + "lastName" + "ext" ASC
+**/
+function sortExtensionsByName(extensions) {
+	return (extensions || []).sort((a, b) => {
+    return `${a.firstName}${a.lastName||""}${a.ext||""}` > `${b.firstName}${b.lastName||""}${b.ext||""}`
+  });
+}
+
+/**
+  Question 2: sort extensions by extType follow these orders ASC
+  DigitalUser < VitrualUser < FaxUser < AO < Dept.
+**/
+function sortExtensionsByExtType(extensions) {
+  const map = {
+    "DigitalUser": 1,
+    "VitrualUser": 2,
+    "FaxUser": 3,
+    "AO": 4,
+    "Dept": 5
+  };
+  return (extensions || []).sort((a, b) => {
+    return map[a.extType] > map[b.extType];
+  })
+}
+
+
+/**
+  saleItems is an Array has each item has such format:
+  {
+	month: n, //[1-12],
+	date: n, //[1-31],
+	transationId: "xxx",
+	salePrice: number
+  }
+**/
+
+/**
+  Question 3: write a function to calculate and return a list of total sales (sum) for each quarter, expected result like:
+  [
+  	{quarter: 1, totalPrices: xxx, transactionNums: n},
+  	{....}
+  ]
+**/
+
+function sumByQuarter(saleItems) {
+  let quarters = [[], [], [], []];
+  for (let i = 0; i < saleItems.length; i++) {
+    let item = saleItems[i];
+    if (item.month < 4) {
+      quarters[0].push(item);
+    } else if(item.month < 7) {
+      quarters[1].push(item);
+    } else if (item.month < 10) {
+      quarters[2].push(item);
+    } else {
+      quarters[3].push(item);
+    }
+  }
+
+  return quarters.map((quarter, index) => {
+    let totalPrices = quarter.reduce((sum, item) => {
+      return sum + item.salePrice;
+    }, 0);
+    return {
+      quarter: index + 1,
+      totalPrices: totalPrices,
+      transactionNums: quarter.length
+    }
+  });
+}
+
+/**
+  Question 4: write a function to calculate and return a list of average sales for each quarter, expected result like:
+  [
+    {quarter: 1, averagePrices: xxx, transactionNums: n},
+    {....}
+  ]
+**/
+
+function averageByQuarter(saleItems) {
+  const quarterSum = sumByQuarter(saleItems);
+  return quarterSum.map((quarter, index) => {
+    return {
+      quarter: index + 1,
+      averagePrices: quarter.transactionNums == 0 ? 0 : quarter.totalPrices / quarter.transactionNums,
+      transactionNums: quarter.transactionNums
+    }
+  })
+}
+
+
+/**
+  Question 5: please create a tool to generate Sequence
+  Expected to be used like:
+  var sequence1 = new Sequence();
+  sequence1.next() --> return 1;
+  sequence1.next() --> return 2;
+  
+  in another module:
+  var sequence2 = new Sequence();
+  sequence2.next() --> 3;
+  sequence2.next() --> 4;
+**/
+
+// just accept Swquence.numbe < Number.MAX_SAFE_INTEGER
+class Sequence {
+    next() {
+        Sequence.number++;
+        console.log("number", Sequence.number);
+        return Sequence.number;
+    }
+}
+
+Object.defineProperty(Sequence, "number", {
+    value: 1,
+    readable: false,
+    writable: true,
+    enumerable: false,
+    configurable: false,
+});
+
+
+/**
+    Question 6:
+    AllKeys: 0-9;
+    usedKeys: an array to store all used keys like [2,3,4];
+    We want to get an array which contains all the unused keys,in this example it would be: [0,1,5,6,7,8,9]
+**/
+
+function getUnUsedKeys(allKeys, usedKeys) {
+	//TODO
+  let map = {}, unUsedKeys = [];
+  for (let i = 0; i < allKeys.length; i++) {
+    map[allKeys[i]] = 0;
+  }
+  for (let i = 0; i < usedKeys.length; i++) {
+    if (map[usedKeys[i]] === 0) {
+      map[usedKeys[i]] = 1;
+    }
+  }
+  for (let i = 0; i < allKeys.length; i++) {
+    if (map[allKeys[i]] === 0) {
+      unUsedKeys.push(allKeys[i]);
+    }
+  }
+  return unUsedKeys;
+}
+
+
+
+
+
