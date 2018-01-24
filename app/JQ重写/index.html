@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style type="text/css">
+            .rect {
+                width: 400px;
+                height: 50px;
+                margin: 10px 0;
+            }
+            .c {
+                border: 1px solid red;
+            }
+            .c1 { border: 1px solid green; }
+            .c2 { border: 1px solid blue; }
+        </style>
+        <script src="./js/common.js"></script>
+    </head>
+    <body>
+        <div class="c3">
+            <div class="c1 rect">
+                <div class="c" style="border: 1px dashed green;">123</div>
+            </div>
+            <div id="c" class="c2 rect"></div>
+            <div class="c rect"></div>
+            <div class="c1 rect"></div>
+        </div>
+        <hr />
+        <div>
+            <div class="c rect"></div>
+            <div class="c1 rect"></div>
+        </div>
+        <hr />
+        <div class="c3">
+            <div class="c rect"></div>
+        </div>
+    </body>
+    <script>
+        var list = R( '.c3 .c,.c1' );
+//         list = select( '.c3' );
+//         list = select( '.c', list );
+//         list = select( '.c1', null, list );
+         
+        for ( var i = 0; i < list.length; i++ ) {
+            list[ i ].style.backgroundColor = 'pink';
+        }
+    </script>
+</html>
